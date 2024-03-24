@@ -1,18 +1,16 @@
-import React from "react";
+import { nanoid } from "nanoid";
 
-const ContactForm = ({ onAddUser }) => {
+const ContactForm = ({ onAdd }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    const userName = evt.currentTarget.elements.name.value;
-    const userNumber = evt.currentTarget.elements.number.value;
     const formData = {
-      userName,
-      userNumber,
+      id: nanoid(),
+      name: evt.currentTarget.elements.name.value,
+      number: evt.currentTarget.elements.number.value,
     };
-    onAddUser(formData);
-
-    console.log("Name: ", userName, "Number: ", userNumber);
+    onAdd(formData);
+    evt.target.reset();
   };
 
   return (
