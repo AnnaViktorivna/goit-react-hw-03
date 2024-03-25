@@ -1,16 +1,17 @@
-import React from "react";
+import css from "./Contact.module.css";
 
 const Contact = ({ id, name, number, onDelete }) => {
   const handleClick = () => {
     onDelete(id);
   };
   return (
-    <li>
-      <p>
-        Name: <b>{name}</b>
+    <li className={css.itemContact}>
+      <p className={css.itemContactName}>
+        <b>{name}</b>
       </p>
-      <p>
-        Number: <b>{number}</b>
+
+      <p className={css.itemContactName}>
+        <b>{number}</b>
       </p>
       <button type='button' onClick={handleClick}>
         ❌ Delete

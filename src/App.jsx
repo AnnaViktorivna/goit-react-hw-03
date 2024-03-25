@@ -7,12 +7,27 @@ import ContactList from "./components/ContactList/ContactList";
 import initialContacts from "./contacts.json";
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState(() => {
+    const stringifiedContacts = localStorage.getItem("contacts");
+    if (!stringifiedContacts) return initialContacts;
+
+    const parsedContacts = JSON.parse(stringifiedContacts);
+    return parsedContacts;
+  });
+
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
+
   const addContact = (newContact) => {
+    const newUserContact = {
+      ...newContact,
+      id: nanoid(),
+    };
     setContacts((prevContacts) => {
-      return [...prevContacts, newContact];
+      return [...prevContacts, newUserContact];
     });
   };
 
